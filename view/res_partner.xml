@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_partner_credit_form" model="ir.ui.view">
+    <field name="name">view.partner.credit.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="account.view_partner_property_form"/>
+    <field name="arch" type="xml">
+      <group name="banks" position="before">
+        <group name="credit_control" string="Credit control">
+          <field name="credit_limit" attrs="{'invisible': [('credit_ignore', '=', True)]}"/>
+          <field name="credit_ignore"/>
+          <field name="grace_days" attrs="{'invisible': [('expired_ignore', '=', True)]}"/>
+          <field name="expired_ignore"/>
+          <field name="sale_order_ignore"/>
+        </group>
+      </group>
+    </field>
+  </record>
+
+  <record id="account_control_view_form_mgr" model="ir.ui.view">
+    <field name="name">account.control.view.form.mgr</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="fix_error_views_mig.view_partner_credit_form"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user') ])]"/>
+    <field name="arch" type="xml">
+      <field name="property_payment_term_id" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+      <field name="credit_limit" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+      <field name="credit_ignore" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+      <field name="grace_days" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+      <field name="expired_ignore" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+      <field name="sale_order_ignore" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="account_control_view_form" model="ir.ui.view">
+    <field name="name">account.control.view.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="fix_error_views_mig.account_control_view_form_mgr"/>
+    <field name="groups_id" eval="[(6, 0, [ref('requiez.account_control_group') ])]"/>
+    <field name="arch" type="xml">
+      <field name="property_payment_term_id" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+      <field name="credit_limit" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+      <field name="credit_ignore" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+      <field name="grace_days" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+      <field name="expired_ignore" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+      <field name="sale_order_ignore" position="attributes">
+        <attribute name="readonly">0</attribute>
+      </field>
+    </field>
+  </record>
+
+  <!-- <record id="invoice_supplier_payment_date_form" model="ir.ui.view"> <field name="name">invoice.supplier.payment.date.form</field> <field name="model">account.invoice</field> <field name="inherit_id" ref="account.invoice_supplier_form"/> <field
+  name="arch" type="xml"> <xpath expr="//field[@name='date_due']" position="after"> <field name="date_payment" attrs="{'invisible': [('type', 'in', ('out_invoice','out_refund'))]}"/> </xpath> </field> </record> <record
+  id="invoice_supplier_prioritized_form" model="ir.ui.view"> <field name="name">invoice.supplier.prioritized.form</field> <field name="model">account.invoice</field> <field name="inherit_id" ref="account.invoice_supplier_form"/> <field name="arch"
+  type="xml"> <xpath expr="//field[@name='date']" position="after"> <field name="prioritized"/> </xpath> </field> </record> <record id="invoice_supplier_group_prioritized_form" model="ir.ui.view"> <field
+  name="name">invoice.group.supplier.prioritized.form</field> <field name="model">account.invoice</field> <field name="inherit_id" ref="invoice_supplier_prioritized_form"/> <field name="groups_id" eval="[(6, 0, [ref('requiez.group_prioritize') ])]"/>
+  <field name="arch" type="xml"> <field name='prioritized' position="attributes"> <attribute name="attrs">{'readonly':False}</attribute> </field> </field> </record> -->
+
+</odoo>
