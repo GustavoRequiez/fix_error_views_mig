@@ -1,6 +1,6 @@
 {
     "name": "fix error views mig",
-    "author": "testmodules",
+    "author": "gflores",
     "summary": """
     Views that for some reason are not created in the requiez module are moved to this repository
     """,
